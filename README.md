@@ -7,3 +7,7 @@ This repository serves as playground for [Electron](https://www.electronjs.org/)
 - [Electron-Forge](https://www.electronforge.io/)
 - [Electron-Builder](https://www.electron.build/)
 - [ElectronReact](https://electron-react-boilerplate.js.org/)
+
+## Setups
+
+1. [el-basic](el-basic) - Basic setup with jquery
