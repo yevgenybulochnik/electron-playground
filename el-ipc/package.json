@@ -1,0 +1,13 @@
+{
+  "name": "el-basic",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^11.3.0",
+    "jquery": "^3.5.1"
+  },
+  "scripts": {
+    "start": "electron ."
+  }
+}
