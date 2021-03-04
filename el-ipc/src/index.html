@@ -5,9 +5,16 @@
     <title>Hello World!</title>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <script>window.$ = window.jQuery = require('jquery');</script>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body style="background: white;">
-    <h1>Hello World!</h1>
+    <nav class="navbar navbar-dark bg-dark" style="-webkit-app-region:drag">
+        <div class="container-fluid">
+            <div class="navbar-brand">Electron-IPC</div>
+            <button class="btn-close btn-close-white"></button>
+        </div>
+    </nav>
     <script type="text/javascript" src="./renderer.js"></script>
+    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
