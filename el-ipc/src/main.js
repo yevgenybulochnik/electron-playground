@@ -6,7 +6,9 @@ function createWindow() {
     height: 1000,
     webPreferences: {
       nodeIntegration: true,
-    }
+    },
+    // titleBarStyle: 'hidden', // makes titlebar hidden on OSX
+    frame: false // removes native menu
   })
 
   win.loadFile('src/index.html')
