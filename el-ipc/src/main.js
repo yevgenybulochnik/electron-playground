@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -11,11 +11,25 @@ function createWindow() {
     frame: false // removes native menu
   })
 
-  win.loadFile('src/index.html')
+  return win
 }
 
-app.whenReady().then(createWindow)
+app.whenReady().then(() => {
+  const win = createWindow()
+  win.loadFile('src/index.html')
+
+  ipcMain.on('close-app', () => {
+    win.close()
+  })
+})
 
 app.on('window-all-closed', () => {
   app.quit()
+})
+
+ipcMain.on('ping', (event) => {
+  console.log('Main Processes has been pinged!')
+  setTimeout(() => {
+    event.sender.send('ping-reply', 'pong')
+  }, 3000)
 })

@@ -11,9 +11,15 @@
     <nav class="navbar navbar-dark bg-dark" style="-webkit-app-region:drag">
         <div class="container-fluid">
             <div class="navbar-brand">Electron-IPC</div>
-            <button class="btn-close btn-close-white"></button>
+            <button id="close-app" class="btn-close btn-close-white"></button>
         </div>
     </nav>
+    <div class='container' style="margin:40px">
+        <div class="ping-pong" style="display:flex; align-items:center">
+            <button id="ping" class='btn btn-primary me-2'>Ping</button>
+            <div id="pong">Click Ping!</div>
+        </div>
+    </div>
     <script type="text/javascript" src="./renderer.js"></script>
     <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
