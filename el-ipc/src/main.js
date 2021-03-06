@@ -1,4 +1,11 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  dialog
+} = require('electron')
+
+const fs = require('fs')
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -18,6 +25,8 @@ app.whenReady().then(() => {
   const win = createWindow()
   win.loadFile('src/index.html')
 
+  // win.webContents.openDevTools()
+
   ipcMain.on('close-app', () => {
     win.close()
   })
@@ -32,4 +41,14 @@ ipcMain.on('ping', (event) => {
   setTimeout(() => {
     event.sender.send('ping-reply', 'pong')
   }, 3000)
+})
+
+ipcMain.handle('file-explore', () => {
+  // Purposely using the sync handler to block the application and prevent the renderer process from executing
+  const dirPath = dialog.showOpenDialogSync({properties: ["openDirectory"]})[0]
+  let files = []
+
+  fs.readdirSync(dirPath).forEach(file => files.push(file))
+
+  return files
 })
