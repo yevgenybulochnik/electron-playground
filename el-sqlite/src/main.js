@@ -6,6 +6,7 @@ const {
 } = require('electron')
 
 const fs = require('fs')
+const db = require('./database')
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -13,6 +14,7 @@ function createWindow() {
     height: 1000,
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false,
     },
     // titleBarStyle: 'hidden', // makes titlebar hidden on OSX
     frame: false // removes native menu
