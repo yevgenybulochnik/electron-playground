@@ -29,6 +29,23 @@ app.whenReady().then(() => {
 
   // win.webContents.openDevTools()
 
+  // wrapping this function is necessary because you have to wait until the index.html file loads.
+  win.webContents.on('did-finish-load', () => {
+    const query = `
+      SELECT
+        users.username,
+        users.email,
+        groups.name AS "group"
+      FROM users JOIN groups
+      WHERE
+        users.group_id = groups.id;
+    `
+    db.all(query, [], (err, rows) => {
+      if (err) console.log(err)
+      win.webContents.send('get-user-list', rows)
+    })
+  })
+
   ipcMain.on('close-app', () => {
     win.close()
   })

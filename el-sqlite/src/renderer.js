@@ -15,6 +15,22 @@ ipcRenderer.on('ping-reply', () => {
   $('#pong').text('Pong!')
 })
 
+// Very poorly written jquery to test out getting data from the sqlite db
+const userListContainer = $('#user-list')
+const usersGroup = $('<ul class="list-group"><ul/>')
+
+userListContainer.append(usersGroup)
+
+ipcRenderer.on('get-user-list', (event, users) => {
+  console.log(users)
+  users.forEach(user => {
+    usersGroup.append(
+      $(`<li class="list-group-item">${user.group} ${user.username} ${user.email}</li>`)
+    )
+  })
+})
+
+
 $('#dir-display-btn').on('click', async () => {
   const results = await ipcRenderer.invoke('file-explore')
 
