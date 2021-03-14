@@ -12,3 +12,4 @@ This repository serves as playground for [Electron](https://www.electronjs.org/)
 
 1. [el-basic](el-basic) - Basic setup with jquery
 2. [el-IPC](el-ipc) - Basic examples if IPC communication + Bootstrap
+3. [el-sqlite](el-sqlite) - Sqlite setup and basic calls
