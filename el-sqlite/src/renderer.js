@@ -22,7 +22,6 @@ const usersGroup = $('<ul class="list-group"><ul/>')
 userListContainer.append(usersGroup)
 
 ipcRenderer.on('get-user-list', (event, users) => {
-  console.log(users)
   users.forEach(user => {
     usersGroup.append(
       $(`<li class="list-group-item">${user.group} ${user.username} ${user.email}</li>`)
