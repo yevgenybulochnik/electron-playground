@@ -29,22 +29,22 @@ app.whenReady().then(() => {
 
   // win.webContents.openDevTools()
 
-  // wrapping this function is necessary because you have to wait until the index.html file loads.
-  win.webContents.on('did-finish-load', () => {
-    const query = `
-      SELECT
-        users.username,
-        users.email,
-        groups.name AS "group"
-      FROM users JOIN groups
-      WHERE
-        users.group_id = groups.id;
-    `
-    db.all(query, [], (err, rows) => {
-      if (err) console.log(err)
-      win.webContents.send('get-user-list', rows)
-    })
-  })
+  // wrapping this function is necessary because you have to wait until the index.html file loads. This is an example of sending a message on load without a trigger from the renderer process
+  // win.webContents.on('did-finish-load', () => {
+  //   const query = `
+  //     SELECT
+  //       users.username,
+  //       users.email,
+  //       groups.name AS "group"
+  //     FROM users JOIN groups
+  //     WHERE
+  //       users.group_id = groups.id;
+  //   `
+  //   db.all(query, [], (err, rows) => {
+  //     if (err) console.log(err)
+  //     win.webContents.send('get-user-list', rows)
+  //   })
+  // })
 
   ipcMain.on('close-app', () => {
     win.close()
@@ -62,8 +62,23 @@ ipcMain.on('ping', (event) => {
   }, 3000)
 })
 
+ipcMain.on('get-user-list', (event) => {
+  const query = `
+    SELECT
+      users.username,
+      users.email,
+      groups.name AS "group"
+    FROM users JOIN groups
+    WHERE
+      users.group_id = groups.id;
+  `
+  db.all(query, [], (err, rows) => {
+    if (err) console.log(err)
+    event.sender.send('get-user-list', rows)
+  })
+})
+
 ipcMain.handle('add-user', (event, args) => {
-  console.log(event)
 
   const sql = `
     INSERT INTO users(username, email, group_id)

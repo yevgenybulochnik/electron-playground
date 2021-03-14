@@ -21,7 +21,9 @@ const usersGroup = $('<ul class="list-group"><ul/>')
 
 userListContainer.append(usersGroup)
 
+ipcRenderer.send('get-user-list')
 ipcRenderer.on('get-user-list', (event, users) => {
+  usersGroup.empty()
   users.forEach(user => {
     usersGroup.append(
       $(`<li class="list-group-item">${user.group} ${user.username} ${user.email}</li>`)
@@ -36,6 +38,7 @@ $('#create-user-form').on('submit',(e) => {
   const email = $('#email').val()
   ipcRenderer.invoke('add-user', {username, email}).then((err) => {
     if (err) console.log(err)
+    ipcRenderer.send('get-user-list')
   })
 })
 
