@@ -29,6 +29,16 @@ ipcRenderer.on('get-user-list', (event, users) => {
   })
 })
 
+// Create new user with form
+$('#create-user-form').on('submit',(e) => {
+  e.preventDefault()
+  const username = $('#userName').val()
+  const email = $('#email').val()
+  ipcRenderer.invoke('add-user', {username, email}).then((err) => {
+    if (err) console.log(err)
+  })
+})
+
 
 $('#dir-display-btn').on('click', async () => {
   const results = await ipcRenderer.invoke('file-explore')

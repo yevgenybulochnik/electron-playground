@@ -62,6 +62,21 @@ ipcMain.on('ping', (event) => {
   }, 3000)
 })
 
+ipcMain.handle('add-user', (event, args) => {
+  console.log(event)
+
+  const sql = `
+    INSERT INTO users(username, email, group_id)
+    VALUES
+      (?,?,1)
+  `
+  db.run(sql, [args['username'], args['email']], (err) => {
+    if (err) {
+      console.log(err)
+    }
+  })
+})
+
 ipcMain.handle('file-explore', () => {
   // Purposely using the sync handler to block the application and prevent the renderer process from executing
   const dirPath = dialog.showOpenDialogSync({properties: ["openDirectory"]})[0]
