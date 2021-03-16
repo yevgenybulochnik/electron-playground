@@ -7,3 +7,4 @@ This setup presents a basic integration with sqlite. It includes some popular bu
 - [Electron-Is-Dev](https://github.com/sindresorhus/electron-is-dev)
 
 # References
+- [Sqlite Tutorial](https://www.sqlitetutorial.net/what-is-sqlite/)
