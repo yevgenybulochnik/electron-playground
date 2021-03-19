@@ -7,3 +7,4 @@ This setup presents Create-React-App integration and sqlite3 integration into el
 - `yarn electron-dev` - Starts CRA in dev and then electron in dev
 
 # References
+- [Electron with CRA](https://www.freecodecamp.org/news/building-an-electron-application-with-create-react-app-97945861647c/)
