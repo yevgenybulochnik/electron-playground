@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -12,6 +12,10 @@ function createWindow() {
 
   win.loadURL('http://localhost:3000')
 }
+
+ipcMain.on('test-channel', (event, args) => {
+  console.log(args)
+})
 
 app.whenReady().then(createWindow)
 

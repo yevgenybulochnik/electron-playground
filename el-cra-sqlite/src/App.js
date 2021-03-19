@@ -1,5 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+const electron = window.require('electron');
+const ipcRenderer  = electron.ipcRenderer;
+
+function testSend() {
+  ipcRenderer.send('test-channel', 'hello world')
+}
 
 function App() {
   return (
@@ -17,6 +23,7 @@ function App() {
         >
           Learn React
         </a>
+        <button onClick={testSend}>test</button>
       </header>
     </div>
   );
