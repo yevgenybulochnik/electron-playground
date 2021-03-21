@@ -7,17 +7,20 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
-    }
+    },
+    frame: false,
   })
-
-  win.loadURL('http://localhost:3000')
+  return win
 }
 
-ipcMain.on('test-channel', (event, args) => {
-  console.log(args)
-})
+app.whenReady().then(() => {
+  const win = createWindow()
+  win.loadURL('http://localhost:3000')
 
-app.whenReady().then(createWindow)
+  ipcMain.on('close-app', () => {
+    win.close()
+  })
+})
 
 app.on('window-all-closed', () => {
   app.quit()
