@@ -24,7 +24,7 @@ function closeApp() {
   ipcRenderer.send('close-app')
 }
 
-const drawerWidth = 180 
+const drawerWidth = 180
 
 const useStyles = makeStyles((theme) => ({
   grow: {
