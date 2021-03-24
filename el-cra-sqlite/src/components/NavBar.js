@@ -1,5 +1,5 @@
 import React from 'react';
-import { fade, makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
@@ -14,6 +14,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import GroupAddIcon from '@material-ui/icons/GroupAdd'
 import AccountBox from '@material-ui/icons/AccountBox'
+import { Link } from 'react-router-dom'
 
 
 const electron = window.require('electron')
@@ -27,6 +28,9 @@ function closeApp() {
 const drawerWidth = 180
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+  },
   grow: {
     flex: 1,
   },
@@ -44,14 +48,17 @@ const useStyles = makeStyles((theme) => ({
   toolBar: {
     height: '48px',
   },
+  content: {
+    flex: 1,
+  }
 }))
 
-export default function NavBar() {
+export default function NavBar({children}) {
 
   const classes = useStyles()
 
   return (
-    <>
+    <div className={classes.root}>
       <AppBar className={classes.appBar}>
         <Toolbar variant="dense">
           <Typography className={classes.grow}>
@@ -78,14 +85,18 @@ export default function NavBar() {
         <List>
           <ListItem
             button
+            component={Link}
+            to='/'
           >
             <ListItemIcon>
               <AccountBox/>
             </ListItemIcon>
-            <ListItemText primary='Views'/>
+            <ListItemText primary='Accounts'/>
           </ListItem>
           <ListItem
             button
+            component={Link}
+            to='/users'
           >
             <ListItemIcon>
               <PersonAddIcon/>
@@ -94,6 +105,8 @@ export default function NavBar() {
           </ListItem>
           <ListItem
             button
+            component={Link}
+            to='/groups'
           >
             <ListItemIcon>
               <GroupAddIcon/>
@@ -102,6 +115,12 @@ export default function NavBar() {
           </ListItem>
         </List>
       </Drawer>
-    </>
+      <main className={classes.content}>
+        <div className={classes.toolBar}/>
+        <div>
+          {children}
+        </div>
+      </main>
+    </div>
   )
 }
