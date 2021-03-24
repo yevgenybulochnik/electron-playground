@@ -5,14 +5,14 @@ import {
 } from 'react-router-dom'
 import logo from './logo.svg';
 import './App.css';
-import Navbar from './components/NavBar'
+import NavBar from './components/NavBar'
 
 
 function App() {
   return (
     <MemoryRouter>
       <div className="App">
-        <Navbar>
+        <NavBar>
           <Switch>
             <Route exact path='/'>
               accounts
@@ -24,7 +24,7 @@ function App() {
               groups
             </Route>
           </Switch>
-        </Navbar>
+        </NavBar>
       </div>
     </MemoryRouter>
   );
