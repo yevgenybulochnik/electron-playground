@@ -7,6 +7,10 @@ import logo from './logo.svg';
 import './App.css';
 import NavBar from './components/NavBar'
 
+import AccountView from './views/Accounts'
+import AddUserView from './views/AddUser'
+import AddGroupView from './views/AddGroup'
+
 
 function App() {
   return (
@@ -15,13 +19,13 @@ function App() {
         <NavBar>
           <Switch>
             <Route exact path='/'>
-              accounts
+              <AccountView/>
             </Route>
             <Route exact path='/users'>
-              users
+              <AddUserView/>
             </Route>
             <Route exact path='/groups'>
-              groups
+              <AddGroupView/>
             </Route>
           </Switch>
         </NavBar>
