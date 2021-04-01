@@ -1,5 +1,5 @@
 # Electron with CRA and sqlite
-This setup presents Create-React-App integration and sqlite3 integration into electron
+This setup presents Create-React-App integration and sqlite3 integration into electron. Material UI is used as a component library.
 
 # Dependencies
 
