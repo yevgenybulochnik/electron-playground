@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-evenly',
   },
+  input: {
+    marginRight: 10,
+  },
   submit: {
     display: 'flex',
     justifyContent: 'center',
@@ -36,14 +39,15 @@ export default function AddUserView() {
         </Typography>
         <div className={classes.inputs}>
           <TextField
+            className={classes.input}
             label='Username'
             helperText='Enter a new Username'
-            variant='outlined'
+            fullWidth
           />
           <TextField
             label='Email'
             helperText='Enter an email'
-            variant='outlined'
+            fullWidth
           />
         </div>
         <div className={classes.submit}>
