@@ -4,6 +4,7 @@ This setup presents Create-React-App integration and sqlite3 integration into el
 # Dependencies
 - [Sqlite3](https://github.com/mapbox/node-sqlite3)
 - [Electron-Builder](https://github.com/sindresorhus/electron-is-dev)
+- [Electron-is-dev]()
 
 # Yarn Commands
 - `yarn electron-dev` - Starts CRA in dev and then electron in dev
