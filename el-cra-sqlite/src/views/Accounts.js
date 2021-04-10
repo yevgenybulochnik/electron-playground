@@ -1,7 +1,26 @@
-import React from 'react'
+import React, { useState, useEffect }from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 
 import GroupCard from '../components/GroupCard'
+
+const electron = window.require('electron')
+const ipcRenderer = electron.ipcRenderer
+
+
+function useGroups() {
+  const [groups, setGroups] = useState([])
+
+  useEffect(() => {
+    ipcRenderer.invoke('get-user-list').then((res) => {
+      const gObjects = Object.entries(res).map(value => {
+        return { name: value[0], users: value[1]}
+      })
+      setGroups(gObjects)
+    })
+  }, [])
+
+  return groups
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,22 +31,7 @@ const useStyles = makeStyles((theme) => ({
 export default function AccountView() {
   const classes = useStyles()
 
-  const groups = [
-    {name: 'Group A', users: [
-      {name: 'user1', email: 'user1@test.com'},
-      {name: 'user2', email: 'user2@test.com'},
-      {name: 'user3', email: 'user3@test.com'},
-      {name: 'user4', email: 'user4@test.com'},
-      {name: 'user5', email: 'user5@test.com'},
-    ]},
-    {name: 'Group A', users: [
-      {name: 'user1', email: 'user1@test.com'},
-    ]},
-    {name: 'Group A', users: [
-      {name: 'user1', email: 'user1@test.com'},
-      {name: 'user2', email: 'user2@test.com'},
-    ]},
-  ]
+  const groups = useGroups()
 
   return (
     <div className={classes.root}>

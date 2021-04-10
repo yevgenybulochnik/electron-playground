@@ -22,10 +22,10 @@ export default function UserCard({ user }) {
       <CardHeader
         avatar={
           <Avatar className={classes.avatar}>
-            {user.name.charAt(0)}
+            {user.username.charAt(0)}
           </Avatar>
         }
-        title={user.name}
+        title={user.username}
         subheader={user.email}
       />
     </Card>
