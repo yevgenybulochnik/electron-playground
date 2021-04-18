@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState, useCallback} from 'react'
 import { makeStyles } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
+
+const electron = window.require('electron')
+const ipcRenderer = electron.ipcRenderer
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,6 +34,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddUserView() {
   const classes = useStyles()
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+
+  const handleSubmit =() => {
+    ipcRenderer.invoke('add-user', {username, email}).then(res => {
+      console.log(res)
+      setUsername('')
+      setEmail('')
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
   return (
     <div className={classes.root}>
       <Paper elevation={3} className={classes.paper}>
@@ -42,11 +58,15 @@ export default function AddUserView() {
             className={classes.input}
             label='Username'
             helperText='Enter a new Username'
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
             fullWidth
           />
           <TextField
             label='Email'
             helperText='Enter an email'
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             fullWidth
           />
         </div>
@@ -54,6 +74,7 @@ export default function AddUserView() {
           <Button
             variant='contained'
             color='primary'
+            onClick={handleSubmit}
           >
             Create
           </Button>

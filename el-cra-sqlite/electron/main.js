@@ -67,9 +67,13 @@ ipcMain.handle('add-user', (event, args) => {
     VALUES
       (?,?,1)
   `
-  db.run(sql, [args['username'], args['email']], (err) => {
-    if (err) {
-      console.log(err)
-    }
+  return new Promise((resolve, reject) => {
+    db.run(sql, [args['username'], args['email']], (err) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve('success')
+      }
+    })
   })
 })
