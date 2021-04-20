@@ -23,7 +23,6 @@ app.whenReady().then(() => {
     win.close()
   })
 })
-
 app.on('window-all-closed', () => {
   app.quit()
 })
@@ -73,6 +72,25 @@ ipcMain.handle('add-user', (event, args) => {
         reject(err)
       } else {
         resolve('success')
+      }
+    })
+  })
+})
+
+
+ipcMain.handle('add-group', (event, args) => {
+  const sql = `
+    INSERT INTO groups(name)
+    VALUES
+      (?)
+  `
+
+  return new Promise((resolve, reject) => {
+    db.run(sql, [args['group']], (err) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve('Group added')
       }
     })
   })
